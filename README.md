@@ -5,6 +5,7 @@ correctness.
 Pseudocode and Description:
 
 anagrams <- empty ArrayList of ArrayList of String
+
 copy <- empty string array with length dictionary size
 keys <- empty string array with length dictionary size
 

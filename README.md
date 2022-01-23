@@ -2,11 +2,14 @@ This program takes in a dictionary of words as a .txt file and divides them into
 regardless of order. Following is the initial algorithm description from where the code was derived, as well as the calculation for the program's run time and a proof of
 correctness.
 
+
 Pseudocode and Description:
+
 
 anagrams <- empty ArrayList of ArrayList of String
 
 copy <- empty string array with length dictionary size
+
 keys <- empty string array with length dictionary size
 
 1) These first three assignments create the anagrams ArrayList that will be returned in the end, an array copy that stores the dictionary in array format for better efficiency, 
@@ -14,50 +17,76 @@ and an array of keys. Each key is a string corresponding to a word in the input 
 “a2b1c1d0...z0” where every letter not in the word is denoted with 0.
 
 for k <- 0 to dictionary size-1 do
+
 	copy [k] <- dictionary.get(k)
+	
 for i <- 0 to dictionary size-1 do
+
 	numA through numZ <- 0
+	
 	for j <- 0 to length of each word in dictionary -1
+	
 		if copy[i].charAt[j] == ‘a’
+		
 			increment numA
+			
 		else if copy[i].charAt[j] == ‘b’
-      increment numB
+		
+      			increment numB
 		. . .
+		
 		else 
 			throw exception for invalid character
+			
 	keys[i] <- “a” + numA + “b” + 
+	
 	numB + … + “z” + numZ
+	
 
 2) The first k loop here copies every word in the input dictionary over into the copy array. The second i loop creates the keys array. It iterates over every word in the array. 
 First, variables computing the counts of each letter are initialized to 0 at every iteration of the loop for each word. The j loop within the i loop iterates over each word 
 which is a String. Each conditional statement checks the current j-th letter, and increments the corresponding count. At the end of this loop, the key is created according to 
 the counts of each letter. The last statement stops the program if a string in the dictionary is not all letters, i.e. is not a word.
 
+
 sortedKeys <- keys
+
 doubleMergeSort (sortedKeys, copy, keys.length)
 
 3) First, a new array of Strings called sortedKeys is created to copy keys without editing it. Then, a version of mergeSort called doubleMergeSort is called on the sortedKeys 
 and copy arrays. doubleMergeSort sorts both arrays according to the alphabetical/numerical order of sortedKeys; sortedKeys is sorted such that every key that is equal, i.e. 
 the keys of anagrams, are next to each other in the array. Likewise, copy is sorted such that every word in copy is at the same index as its corresponding key.
 
+
 curKey <- sortedKeys[0]
+
 anagrams.add(new ArrayList)
+
 anagrams.get(0).add(copy[0])
+
 anagramCount <- 0
+
 
 4) The variables needed for the next step, where the anagram groups are created, are initialized. curKey denotes the current key being observed, and is initialized to the first 
 key in the array of sorted keys. A new array list is added to anagrams, which will store the first set of anagrams. The first word in the dictionary sorted according to keys is 
 added to this first array. Lastly, a variable counting the number of anagrams present is initialized at 0 to denote the first anagram, which will be stored at anagrams index 0.
+
 if keys length > m
 	
-for m <- 1 to copy length
-  if sortedKeys[m] == curKey
-		anagrams.get(anagramCount).add(copy[m])
-	else
-			anagrams.add(new 	Arraylist)
+	for m <- 1 to copy length
+	
+ 		if sortedKeys[m] == curKey
+		
+			anagrams.get(anagramCount).add(copy[m])
+		else
+			anagrams.add(new Arraylist)
+			
 			anagrams.get(anagramCount++).add(copy[m])
+			
       curKey <- sortedKeys[m]
+      
 return anagrams
+
 
 5) This first if statement checks to see if the dictionary has more than 1 word (if the dictionary only has 1 word, then anagrams is returned as is with a single anagram array 
 list that has a single element). The loop iterates over every element in the now-sorted copy array, and if the key of that word matches the key of the previously observed word, 

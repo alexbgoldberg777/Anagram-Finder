@@ -137,3 +137,14 @@ word is next to any anagrams it might have within the array; likewise, all equal
 loop iterating over the keys and words adds all words in the same anagram before moving onto the next one because the words are in order according to their keys, and therefore
 according to their anagram class. Because all words that are anagrams to each other are added at once, and they all must be grouped together in the array since their 
 keys were alphanumerically sorted, any anagrams must have been added to the same class.
+
+
+**Dependencies**
+
+java.io.File
+
+java.io.FileNotFoundException
+
+java.util.ArrayList
+
+java.util.Scanner
